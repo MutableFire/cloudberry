@@ -273,12 +273,12 @@ Notice that: Lower TPS does not mean the protocol is slower, might means that th
 
 # interconnect statistics
 
-This extension provides cumulative interconnect statistics for Cloudberry Database, including queue sizes, buffer usage, retransmits, packet errors, and other UDPIFC‑related metrics. 
+This extension provides cumulative interconnect statistics for Apache Cloudberry, including queue sizes, buffer usage, retransmits, packet errors, and other UDPIFC‑related metrics. 
 
 It exposes three views with statistics at different aggregation levels:
-gp_interconnect_stats — total cluster‑wide stats;
-gp_interconnect_stats_per_segment — stats per segment;
-gp_interconnect_stats_per_host — stats grouped by host.
+- gp_interconnect_stats — total cluster‑wide stats;
+- gp_interconnect_stats_per_segment — stats per segment;
+- gp_interconnect_stats_per_host — stats grouped by host.
 
 ## How to create the extension
 
