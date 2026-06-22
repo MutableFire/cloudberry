@@ -25,7 +25,6 @@
 PG_MODULE_MAGIC;
 
 static shmem_startup_hook_type prev_shmem_startup_hook = NULL;
-static shmem_request_hook_type prev_shmem_request_hook = NULL;
 
 MotionIPCLayer tcp_ipc_layer = {
     .ic_type = INTERCONNECT_TYPE_TCP,
@@ -146,15 +145,6 @@ MotionIPCLayer udpifc_ipc_layer = {
 };
 
 static void
-InterconnectShmemRequest(void)
-{
-	if (prev_shmem_request_hook)
-		prev_shmem_request_hook();
-
-	RequestAddinShmemSpace(MAXALIGN(sizeof(ICStatisticsShmem)));
-}
-
-static void
 InterconnectShmemInit(void)
 {
     if (prev_shmem_startup_hook)
@@ -178,8 +168,7 @@ _PG_init(void)
 
     if (Gp_interconnect_type == INTERCONNECT_TYPE_UDPIFC)
     {
-	    prev_shmem_request_hook = shmem_request_hook;
-        shmem_request_hook = InterconnectShmemRequest;
+	    RequestAddinShmemSpace(MAXALIGN(sizeof(ICStatisticsShmem)));
 
         prev_shmem_startup_hook = shmem_startup_hook;
         shmem_startup_hook = InterconnectShmemInit;
@@ -189,6 +178,5 @@ _PG_init(void)
 void
 _PG_fini(void)
 {
-    shmem_request_hook = prev_shmem_request_hook;
     shmem_startup_hook = prev_shmem_startup_hook;
 }
