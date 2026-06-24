@@ -1381,8 +1381,6 @@ addCursorIcEntry(CursorICHistoryTable *t, uint32 icId, uint32 cid)
 	t->count++;
 
 	elog(DEBUG2, "add icid %d cid %d status %d", p->icId, p->cid, p->status);
-
-	return;
 }
 
 /*
@@ -1770,7 +1768,6 @@ error:
 			(errcode(ERRCODE_GP_INTERCONNECTION_ERROR),
 			 errmsg("interconnect error: Could not set up udp listener socket"),
 			 errdetail("%s: %m", fun)));
-	return;
 }
 
 /*
@@ -1806,8 +1803,6 @@ ic_set_pthread_sigmasks(sigset_t *old_sigs)
 #else
 	(void) old_sigs;
 #endif
-
-	return;
 }
 
 static void
@@ -1822,8 +1817,6 @@ ic_reset_pthread_sigmasks(sigset_t *sigs)
 #else
 	(void) sigs;
 #endif
-
-	return;
 }
 
 void
@@ -1945,7 +1938,6 @@ InitMotionUDPIFC(int *listenerSocketFd, int32 *listenerPort)
 	}
 
 	ic_control_info.threadCreated = true;
-	return;
 }
 
 void
@@ -2175,8 +2167,6 @@ connDelHash(ConnHashTable *ht, MotionConn *mConn)
 		free(trash);
 
 	ic_statistics.activeConnectionsNum--;
-
-	return;
 }
 
 /*
@@ -4878,8 +4868,6 @@ markUDPConnInactiveIFC(MotionConn *conn)
 	pthread_mutex_lock(&ic_control_info.lock);
 	conn->stillActive = false;
 	pthread_mutex_unlock(&ic_control_info.lock);
-
-	return;
 }
 
 void
@@ -4918,8 +4906,6 @@ DeregisterReadInterestUDP(ChunkTransportState *transportStates,
 	elog(LOG, "deregisterReadInterest set stillactive = false for node %d route %d (%s)", motNodeID, srcRoute, reason);
 #endif
 	markUDPConnInactiveIFC(conn);
-
-	return;
 }
 
 
@@ -5509,8 +5495,6 @@ xmit_retry:
 		logPkt("PKT DETAILS ", buf->pkt);
 #endif
 	}
-
-	return;
 }
 
 
@@ -8208,7 +8192,6 @@ send_error:
 		pg_freeaddrinfo_all(hint.ai_family, addrs);
 	if (sockfd != -1)
 		closesocket(sockfd);
-	return;
 }
 
 void logChunkParseDetails(MotionConn *conn, uint32 ic_instance_id)
