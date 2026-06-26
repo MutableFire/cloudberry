@@ -2167,6 +2167,8 @@ connDelHash(ConnHashTable *ht, MotionConn *mConn)
 		free(trash);
 
 	ic_statistics.activeConnectionsNum--;
+
+	return;
 }
 
 /*
@@ -4906,6 +4908,8 @@ DeregisterReadInterestUDP(ChunkTransportState *transportStates,
 	elog(LOG, "deregisterReadInterest set stillactive = false for node %d route %d (%s)", motNodeID, srcRoute, reason);
 #endif
 	markUDPConnInactiveIFC(conn);
+
+	return;
 }
 
 
@@ -5495,6 +5499,8 @@ xmit_retry:
 		logPkt("PKT DETAILS ", buf->pkt);
 #endif
 	}
+
+	return;
 }
 
 
