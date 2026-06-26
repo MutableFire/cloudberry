@@ -2167,6 +2167,8 @@ connDelHash(ConnHashTable *ht, MotionConn *mConn)
 		free(trash);
 
 	ic_statistics.activeConnectionsNum--;
+
+	return;
 }
 
 /*
